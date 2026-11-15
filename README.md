@@ -10,6 +10,12 @@
 
 ---
 
+<p align="center">
+     <img width="1917" height="810" alt="image" src="https://github.com/user-attachments/assets/15206ae3-2b87-4ad1-8e68-b8c930683bb8" />
+     <br />
+     <sub><b>Figure 1:</b> Unified Step 1 Intake — Mode A (Zone A/B Artifact Dropzone & 3-Angle Guided Blueprint Stencil), Mode B (&lt;50 ms OEM Figure Number Decoder), and Mode C (Visual L2 &rarr; L4 Class Selector).</sub>
+   </p>
+
 ## Table of Contents
 1. [Core Mission & Safety Mandate](#1-core-mission--safety-mandate)
 2. [Monorepo Architecture & Directory Topology](#2-monorepo-architecture--directory-topology)
@@ -80,6 +86,12 @@ icx-platform/
 ## 3. Unified 5-Step Manual Spare Part Insertion Workflow
 
 The platform governs **31 industrial equipment classes** (**16 Fluid Valve classes** `FLUD-VALV-*` and **15 Mechanical Seal & Dry Gas Seal classes** `MECH-SEAL-*`). Single spare part insertion follows a unified 5-step architecture (see [`.ICX_context/09_MANUAL_INSERTION_WORKFLOW_SPEC.md`](./.ICX_context/09_MANUAL_INSERTION_WORKFLOW_SPEC.md); *Bulk Excel/SAP `.xlsx` multi-part ingestion is deferred to future sprints*):
+
+<p align="center">
+     <img width="1916" height="826" alt="image" src="https://github.com/user-attachments/assets/f7ad64ad-aa52-4535-9620-7b9f2edbf335" />
+     <br />
+     <sub><b>Figure 1:</b> Unified Step 1 Intake — Mode A (Zone A/B Artifact Dropzone & 3-Angle Guided Blueprint Stencil), Mode B (&lt;50 ms OEM Figure Number Decoder), and Mode C (Visual L2 &rarr; L4 Class Selector).</sub>
+   </p>
 
 1. **Step 0 — Warehouse / Plant Scope Selection:**
    - Seller selects `location_id` from their `assignedLocationIds` (enforced by `LocationScopeGuard` on `POST /api/v1/inventory/drafts`).
