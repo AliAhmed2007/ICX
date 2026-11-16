@@ -1,381 +1,328 @@
-# ICX Platform — Industrial Circular Exchange
+<div align="center">
 
-> **A high-integrity B2B engineering exchange for surplus, critical-path capital equipment (valves, mechanical seals, pumps) across heavy process industries (Oil & Gas, Petrochemicals, Fertilizers, Power Generation).**
+# ICX — Industrial Circular Exchange
 
-[![Node Version](https://img.shields.io/badge/Node.js-%3E%3D24.0.0-339933?logo=node.js)](https://nodejs.org/)
-[![pnpm Version](https://img.shields.io/badge/pnpm-%3E%3D9.12.0-F69220?logo=pnpm)](https://pnpm.io/)
-[![Python Version](https://img.shields.io/badge/Python-%3E%3D3.12-3776AB?logo=python)](https://python.org/)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16%20%2B%20RLS-4169E1?logo=postgresql)](https://www.postgresql.org/)
-[![Docker](https://img.shields.io/badge/Docker-Compose%20v2-2496ED?logo=docker)](https://www.docker.com/)
+### *An Evidence-Backed, Deterministic Engineering Clearinghouse for Critical-Path Industrial Surplus Equipment*
+
+[![Domain](https://img.shields.io/badge/Domain-Heavy_Process_Engineering-0F4C81?style=for-the-badge)](https://github.com)
+[![Equipment Classes](https://img.shields.io/badge/Governed_Classes-31_Archetypes-1B7F79?style=for-the-badge)](https://github.com)
+[![Safety Mandate](https://img.shields.io/badge/Core_Axiom-Rule_0:_Strict_Abstention-B22222?style=for-the-badge)](https://github.com)
+[![Standards](https://img.shields.io/badge/Standards-ASME_%7C_API_%7C_NACE_%7C_ISO-4A5568?style=for-the-badge)](https://github.com)
+[![Architecture](https://img.shields.io/badge/Architecture-Zero--Trust_Multi--Tenant-2D3748?style=for-the-badge)](https://github.com)
+
+<br />
+
+<img width="1917" height="817" alt="ICX Platform Unified Intake Interface" src="https://github.com/user-attachments/assets/9fe2a880-f7b5-4bfb-94b6-47c9e12991bd" />
+<br />
+<sub><b>Figure 1:</b> Unified Step 1 Intake — Mode A (Zone A/B Artifact Dropzone &amp; 3-Angle Guided Blueprint Stencil), Mode B (&lt;50 ms OEM Figure Number Decoder), and Mode C (Visual L2 &rarr; L4 Class Selector).</sub>
+
+</div>
 
 ---
 
-<p align="center">
-     <img width="1917" height="817" alt="image" src="https://github.com/user-attachments/assets/9fe2a880-f7b5-4bfb-94b6-47c9e12991bd" />
-     <br />
-     <sub><b>Figure 1:</b> Unified Step 1 Intake — Mode A (Zone A/B Artifact Dropzone & 3-Angle Guided Blueprint Stencil), Mode B (&lt;50 ms OEM Figure Number Decoder), and Mode C (Visual L2 &rarr; L4 Class Selector).</sub>
-   </p>
+> [!NOTE]
+> **Academic & Portfolio Showcase Repository**
+> This repository presents the architectural design, domain engineering methodology, safety invariants, and system workflows of the **ICX (Industrial Circular Exchange)** platform. In accordance with intellectual property and commercial confidentiality policies, proprietary source code, internal schemas, and deployment configurations are maintained in a private repository.
+
+---
+
+## Abstract
+
+Heavy process industries—including **Oil & Gas**, **Petrochemicals**, **Fertilizers**, and **Power Generation**—face a dual structural inefficiency: billions of dollars in brand-new, unused capital spare parts remain stranded in project warehouses, while active facilities suffer unplanned shutdowns costing **\$100,000 to \$1,000,000 per day** due to **30-to-52-week** Original Equipment Manufacturer (OEM) lead times. Conventional B2B e-commerce marketplaces rely on unstructured text search and probabilistic similarity, which are fundamentally unsafe for pressure-retaining equipment operating in toxic ($\text{H}_2\text{S}$), high-pressure (Class 2500), or cryogenic ($-196^\circ\text{C}$) service.
+
+**ICX (Industrial Circular Exchange)** resolves this challenge by transforming unstructured warehouse artifacts—physical nameplate photographs, cast body stamps, OEM General Arrangement (GA) drawings, and EN 10204 3.1 Mill Test Certificates—into a **deterministic, evidence-backed engineering source of truth**. Built around **Rule 0 (Strict Abstention)**, a **31-class domain taxonomy**, a **4-layer progressive clarification pipeline**, and **5-state deterministic compatibility evaluation**, ICX enables plant reliability engineers to procure verified surplus equipment with mathematical and regulatory certainty while preserving strict multi-tenant data sovereignty.
+
+---
 
 ## Table of Contents
-1. [Core Mission & Safety Mandate](#1-core-mission--safety-mandate)
-2. [Monorepo Architecture & Directory Topology](#2-monorepo-architecture--directory-topology)
-3. [Unified 5-Step Manual Spare Part Insertion Workflow](#3-unified-5-step-manual-spare-part-insertion-workflow)
-4. [Prerequisites & System Requirements](#4-prerequisites--system-requirements)
-5. [Quick Start & Local Environment Setup](#5-quick-start--local-environment-setup)
-6. [Docker Infrastructure & Network Topology](#6-docker-infrastructure--network-topology)
-7. [Daily Developer Workflows & Commands](#7-daily-developer-workflows--commands)
-8. [Non-Negotiable System Laws](#8-non-negotiable-system-laws)
-9. [Canonical Knowledge Base & Developer Skills](#9-canonical-knowledge-base--developer-skills)
-10. [Troubleshooting & FAQ](#10-troubleshooting--faq)
+
+1. [Problem Statement & Industrial Motivation](#1-problem-statement--industrial-motivation)
+2. [Core Engineering Philosophy & Safety Invariants](#2-core-engineering-philosophy--safety-invariants)
+3. [System Architecture & Trust Boundaries](#3-system-architecture--trust-boundaries)
+4. [Governed Equipment Taxonomy & International Standards](#4-governed-equipment-taxonomy--international-standards)
+5. [Multi-Modal Intake & Computer Vision Pipeline](#5-multi-modal-intake--computer-vision-pipeline)
+6. [Deterministic Matching, Auto-Inference & Completeness Scoring](#6-deterministic-matching-auto-inference--completeness-scoring)
+7. [Multi-Tenant Data Sovereignty & Provenance Governance](#7-multi-tenant-data-sovereignty--provenance-governance)
+8. [Verification Methodology & Key System Metrics](#8-verification-methodology--key-system-metrics)
 
 ---
 
-## 1. Core Mission & Safety Mandate
+## 1. Problem Statement & Industrial Motivation
 
-Operating equipment in toxic ($\text{H}_2\text{S}$), high-pressure (Class 2500 / 6,000+ PSI), and cryogenic ($-196^\circ\text{C}$) environments means **an incorrect part can cause catastrophic plant failure, lethal chemical releases, or severe environmental disasters**.
+### The Stranded Capital vs. Critical Downtime Paradox
 
-### Rule 0: Strict Abstention ("Missing Is Always Better Than a Guess")
-- **Never guess, infer, or hallucinate missing mechanical attributes.**
-- If an attribute cannot be mathematically verified from a physical nameplate, catalog grammar, or EN 10204 3.1 Mill Test Certificate, the system records `"UNKNOWN"`.
-- Missing mandatory attributes automatically route to `REVIEW_REQUIRED`, never to an approximate or fuzzy match.
-
----
-
-## 2. Monorepo Architecture & Directory Topology
-
-The monorepo is managed with **pnpm workspaces** and **Turborepo**:
-
-```
-icx-platform/
-├── .ICX_context/          # Canonical Declarative Knowledge Base (00_README.md + 01..09 Specs)
-├── .skills/               # 9 Procedural Task Runbooks for Engineers & AI Agents (SKILL_01..09)
-├── AGENTS.md              # Universal Directives for AI Coding Assistants
-├── CLAUDE.md / GEMINI.md  # Tool-specific agent configurations
-├── apps/
-│   ├── api/               # NestJS 12 Gateway + BullMQ Worker Daemon + SSE Streamer (Port 4000)
-│   └── web/               # Next.js 16 (App Router) + React 19 + shadcn/ui Dynamic Forms (Port 3000)
-├── packages/
-│   ├── dna-registry/      # 31 Class YAMLs + 8 Shared Master YAMLs + Code Generator
-│   ├── contracts/         # TypeScript DTOs, Zod Schemas, UI Manifests, Artifact Policies
-│   ├── engine-rules/      # Deterministic Matching Engine, Auto-Inference, DCS 0-100, Crosswalks
-│   ├── db/                # PostgreSQL 16 + Drizzle ORM Schema, Migrations, RLS Policies
-│   ├── security/          # Cryptographic primitives (HMAC masking, Argon2id, tokens)
-│   └── config/            # Shared ESLint, Prettier, and TypeScript configurations
-├── services/
-│   └── extractor/         # Python 3.12+ FastAPI, OpenCV CLAHE, PaddleOCR, MPN Decoders (Port 8000)
-└── infra/
-    ├── compose/           # Multi-container Docker Compose definitions & secrets
-    ├── postgres/          # Custom PostgreSQL 16 image + 00-init-roles.sql
-    └── proxy/             # Nginx 1.27 edge reverse proxy configuration
-```
-
-### Monorepo Boundaries & Key Patterns
-
-| Directory | Technology | Role / Responsibility | Key Invariant |
-| :--- | :--- | :--- | :--- |
-| **`packages/dna-registry`** | YAML + Zod + TS AST | Equipment taxonomy source of truth (**31 governed classes** + **8 shared master registries**) & code generator. | **Zero Runtime YAML Parsing.** Edit YAMLs in `registry/` and run `pnpm --filter @icx/dna-registry run generate`. |
-| **`packages/contracts`** | TypeScript + Zod | Master discriminated unions (`TechnicalDnaSchema`, `ExactTechnicalDnaSchema`), `UiManifestRegistry`, `TaxonomyRootManifest`, `DATA_SOURCES`, and `getArtifactPolicyForClass()`. | Pure compile-time & runtime validation contracts. Zero database access. |
-| **`packages/engine-rules`**| TypeScript + Vitest | Production deterministic matching engine (`evaluator.ts`), `runDeterministicAutoInference()`, `calculateClassDcs()`, and international crosswalks. | Strict **5-State Match Model**: `EXACT`, `ENGINEERING_EQUIVALENT`, `REVIEW_REQUIRED`, `DISQUALIFIED`, `QUARANTINED`. |
-| **`packages/db`** | Drizzle ORM + PostgreSQL 16 | Relational models (`tables.ts`), migrations, RLS security policies. | Runtime queries run as `icx_app` (`NOBYPASSRLS`). Migrations run as `icx_owner`. |
-| **`apps/api`** | NestJS 12 + BullMQ | HTTP API gateway, `LocationScopeGuard`, S3 presigned uploads, and Redis SSE streaming. | Enforces PostgreSQL RLS via `RlsDatabaseService.withTenant()`. |
-| **`apps/web`** | Next.js 16 + React 19 + shadcn/ui | Unified 5-Step Seller Intake Wizard (Modes A, B, C), dynamic form engine, and RFQ portal. | Renders forms dynamically from `UiManifestRegistry` (`select`, `combobox`, `input_number`, `switch`). |
-| **`services/extractor`** | Python 3.12+ / FastAPI / PaddleOCR | 2-Pass AI extraction (OpenCV CLAHE + OCR bounding boxes + Pydantic v2 `<ClassId>ExtractModel`) & MPN decoders. | **Air-gapped.** Zero database access. Enforces Rule 0 (`ConfigDict(extra='forbid')`). |
-
----
-
-## 3. Unified 5-Step Manual Spare Part Insertion Workflow
-
-The platform governs **31 industrial equipment classes** (**16 Fluid Valve classes** `FLUD-VALV-*` and **15 Mechanical Seal & Dry Gas Seal classes** `MECH-SEAL-*`). Single spare part insertion follows a unified 5-step architecture (see [`.ICX_context/09_MANUAL_INSERTION_WORKFLOW_SPEC.md`](./.ICX_context/09_MANUAL_INSERTION_WORKFLOW_SPEC.md); *Bulk Excel/SAP `.xlsx` multi-part ingestion is deferred to future sprints*):
-
-<p align="center">
-     <img width="1916" height="826" alt="image" src="https://github.com/user-attachments/assets/f7ad64ad-aa52-4535-9620-7b9f2edbf335" />
-     <br />
-     <sub><b>Figure 1:</b> Unified Step 1 Intake — Mode A (Zone A/B Artifact Dropzone & 3-Angle Guided Blueprint Stencil), Mode B (&lt;50 ms OEM Figure Number Decoder), and Mode C (Visual L2 &rarr; L4 Class Selector).</sub>
-   </p>
-
-1. **Step 0 — Warehouse / Plant Scope Selection:**
-   - Seller selects `location_id` from their `assignedLocationIds` (enforced by `LocationScopeGuard` on `POST /api/v1/inventory/drafts`).
-2. **Step 1 — Identification & Intake (3 Convergent Modes on One Screen):**
-   - **Mode A (Smart Photo & Document Dropzone — Default):** Browser computes SHA-256 hashes, uploads Zone A photos & Zone B PDFs directly to S3 via presigned `PUT` URLs (`POST /upload-urls`), triggers BullMQ extraction (`POST /extract`), and streams live SSE events (`GET /events`).
-   - **Mode B (Instant OEM Part / Figure Number Decoder — `< 50 ms`):** Seller selects from `CONTROLLED_OEM_MANUFACTURERS` (`VELAN`, `KITZ`, `EMERSON_FISHER`, `EMERSON_CROSBY`, `JOHN_CRANE`, `EAGLEBURGMANN`, `FLOWSERVE`, `CAMERON_WKM`, `PALL_CORPORATION`, `PARKER_PRADIFA`) and enters a regex-validated `oem_part_number` (`^[A-Z0-9\-\._/]{3,50}$`, `POST /decode-mpn`), pre-filling 60–75% of Layers 1–3 synchronously.
-   - **Mode C (Guided 3-Click Manual Class Selection — Fallback):** Driven by `TaxonomyRootManifest` and `UiManifestRegistry` (`L2` Family $\rightarrow$ `L3` Category $\rightarrow$ `L4` Governed Class Card with bilingual labels and `included` / `excluded` scope bullets).
-3. **Steps 2–5 — Split-Screen Interactive 4-Layer Form & Publication:**
-   - **Deterministic Auto-Inference (`runDeterministicAutoInference`):** Automatically derives mathematically locked secondary fields (`NPS` $\leftrightarrow$ `DN`, `body_material` $\rightarrow$ ASME B16.34 material group/temps, `ASME_B16_5` for flanged $\text{NPS} \le 24$, API 600 Stellite seat inserts, SAE AS568 O-ring dimensions, and ISO 2230 elastomer `shelf_life_expiry_date`).
-   - **Low-Friction Attachment Policy (`getArtifactPolicyForClass`):** Requires only **2 to 3 physical smartphone photos (Zone A)** to publish (`SEARCHABLE_LISTING` / `RFQ_READY_LISTING`), while treating PDF certificates (`EN_10204_3_1_MTC`, `OEM_GA_DRAWING_PDF`, `TEST_CERTIFICATE`) as **Optional Boosters (Zone B)** that unlock `EXACT_MATCH_ELIGIBLE` once verified by an ICX `STEWARD`.
-   - **Data Completeness Score (`DCS 0–100`) & 5 Completeness Stages (`calculateClassDcs`):** Gates every item into `QUARANTINED`, `DRAFT_LISTING` ($\text{DCS} < 50$ or Zone A incomplete), `SEARCHABLE_LISTING` ($\text{DCS} \ge 50$ + Zone A photos), `RFQ_READY_LISTING` ($\text{DCS} \ge 75$), or `EXACT_MATCH_ELIGIBLE` ($\text{DCS} \ge 90$ + `<ClassId>ExactSchema` + Steward-verified PDFs).
-
----
-
-## 4. Prerequisites & System Requirements
-
-Before setting up the repository, ensure your development machine has:
-
-- **Node.js**: `>= 24.0.0` (LTS recommended)
-- **pnpm**: `>= 9.12.0` (Install via `corepack enable` or `npm install -g pnpm@latest`)
-- **Python**: `>= 3.12`
-- **uv**: Fast Python package manager ([Astral uv](https://docs.astral.sh/uv/))
-- **Docker & Docker Compose**: v2+ with Docker Desktop running
-- **Git**
-
----
-
-## 5. Quick Start & Local Environment Setup
-
-Follow these exact steps to set up the repository from scratch:
-
-### Step 1: Clone the Repository
-```bash
-git clone https://github.com/your-org/icx-platform.git
-cd icx-platform
-```
-
-### Step 2: Configure Environment Variables
-Copy the master environment template to `.env` and `.env.local`:
-```bash
-# On Linux / macOS
-cp .env.example .env
-cp .env.example .env.local
-
-# On Windows (PowerShell)
-Copy-Item .env.example .env
-Copy-Item .env.example .env.local
-```
-
-### Step 3: Install Node Dependencies
-```bash
-pnpm install
-```
-
-### Step 4: Sync Python AI Extractor Dependencies
-```bash
-uv sync --project services/extractor
-```
-
-### Step 5: Start Supporting Infrastructure via Docker
-Spin up PostgreSQL 16, Redis, and MinIO S3 Object Storage:
-```bash
-docker compose -f infra/compose/compose.yaml -f infra/compose/compose.dev.yaml up -d postgres redis storage
-```
-*Wait ~5 seconds for Postgres and MinIO healthchecks to pass.*
-
-### Step 6: Generate Code, Apply Migrations & Seed Database
-Compile the equipment taxonomy YAMLs into TypeScript & Python contracts, then run migrations & seed demo data:
-```bash
-# 1. Compile Taxonomy YAMLs -> TypeScript/Python DTOs & UI manifests
-pnpm --filter @icx/dna-registry run generate
-
-# 2. Run Database Migrations & Seed All 11 Tables
-pnpm run db:setup
-
-# 3. Launch Drizzle Studio to inspect tables, columns, and records
-pnpm run db:studio
-```
-pnpm --filter @icx/db run db:migrate
-```
-
-### Step 7: Verify Everything Runs 100%
-Execute the four mandatory validation test gates:
-```bash
-# Gate 1: Taxonomy Validation Vectors (124/124 across all 31 governed classes)
-pnpm --filter @icx/dna-registry run test:vectors
-
-# Gate 2: Deterministic Matching Engine, Real-World User Simulation & Insertion Workflow (30/30 tests)
-pnpm --filter @icx/engine-rules run test
-
-# Gate 3: Database Row-Level Security Integrity Test
-pnpm --filter @icx/db test:rls
-
-# Gate 4: Python MPN Grammar Decoder Unit Tests
-uv run --project services/extractor python -m unittest services/extractor/test_mpn_decoders.py
-```
-
-### Step 8: Start the Local Development Stack
-You can start all services in parallel, or start them individually:
-
-```bash
-# Option A: Start all services via Turborepo (API, Web, Worker)
-pnpm run dev
-
-# Option B: Run services in separate terminal tabs for detailed logging
-# Terminal 1: NestJS API
-pnpm --filter @icx/api run dev:api
-
-# Terminal 2: BullMQ Queue Worker
-pnpm --filter @icx/api run dev:worker
-
-# Terminal 3: Next.js Frontend
-pnpm --filter @icx/web run dev
-
-# Terminal 4: Python AI Extractor
-uv run --project services/extractor uvicorn src.main:app --reload --port 8000
-```
-
----
-
-## 6. Docker Infrastructure & Network Topology
-
-The local and staging environment runs an isolated multi-container network topology:
-
-```
-[ Web Browser / Client ]
-           │
-           ▼ (Ports 80 / 443)
-┌─────────────────────────────────────────────────────────────┐
-│ proxy (Nginx 1.27 Alpine)                                   │
-└──────────┬───────────────────────────┬──────────────────────┘
-           │                           │
-           ▼ (:3000)                   ▼ (:4000)
-┌─────────────────────┐     ┌─────────────────────────────────┐
-│ web (Next.js 16)    │     │ api (NestJS 12 Gateway)         │
-└─────────────────────┘     └──────────┬──────────────┬───────┘
-                                       │              │
-                     ┌─────────────────┘              │
-                     ▼                                ▼ (:8000)
-┌─────────────────────────────────┐        ┌──────────────────┐
-│ worker (BullMQ Worker Daemon)   │───────>│ extractor        │
-└──────────┬──────────────┬───────┘ (HTTP) │ (Python FastAPI) │
-           │              │                └──────────────────┘
-           │              │                   (NO DB ACCESS)
-           ▼              ▼
-┌───────────────────┐  ┌───────────────────┐
-│ postgres (PG 16)  │  │ redis (Redis 7)   │
-│ Role: icx_app     │  │ (Queue & Cache)   │
-└───────────────────┘  └───────────────────┘
-```
-
-### Service Endpoints & Web GUIs
-
-| Service | Host URL | Description / Credentials |
+| Industrial Challenge | Operational Reality | Consequence of Status Quo |
 | :--- | :--- | :--- |
-| **Next.js Web UI** | `http://localhost:3000` | Dynamic intake forms, search catalog, and RFQ deal room. |
-| **NestJS API Gateway** | `http://localhost:4000` | Core REST API and authentication endpoints. |
-| **AI Extractor (FastAPI)** | `http://localhost:8000/docs` | Swagger interactive OpenAPI documentation for OCR & MPN decoders. |
-| **Drizzle Studio (Database GUI)** | `https://local.drizzle.studio` | Visual interactive schema & data explorer (launch via `pnpm run db:studio`). |
-| **pgAdmin (PostgreSQL GUI)**| `http://localhost:5050` | Enterprise DB console. User: `admin@icx.test`, Pass: `icx_local_admin_2026`. |
-| **MinIO S3 Storage Console**| `http://localhost:9001` | S3 bucket management. User: `icx_storage_admin`, Pass: in `.env`. S3 API on `9000`. |
+| **Dormant Capital Inventory** | EPC contractors and plant operators accumulate unused, project-surplus valves and mechanical seals after capital turnarounds. | High-value assets depreciate in storage yards with fragmented ERP descriptions and missing traceability. |
+| **Unplanned Shutdown Exposure** | A single failed Class 600 stop-check valve or compressor dry gas seal can halt an entire process train. | **30–52 week** OEM manufacturing lead times result in **\$100K–\$1M/day** in lost production. |
+| **Failure of Keyword Marketplaces** | Generic e-commerce platforms match listings using free-text keywords or fuzzy vector embeddings. | Physically incompatible or metallurgically unsafe substitutions introduce catastrophic safety risks. |
 
-### The Dual-Role Database Architecture
+### Why Probabilistic Text Matching Is Unacceptable in Process Engineering
 
-ICX enforces a strict separation between schema migration and runtime query execution:
-1. **`icx_owner` (Migration Role):** Has `SUPERUSER`/`CREATEROLE` privileges. Used solely by `drizzle-kit` or the ephemeral `migrate` container to apply DDL schema changes. **Never used by runtime services.**
-2. **`icx_app` (Application Role):** Unprivileged role (`NOSUPERUSER`, `NOCREATEROLE`, `NOBYPASSRLS`). Used by NestJS and BullMQ workers. Bound strictly by PostgreSQL Row-Level Security policies.
+In heavy industrial piping and rotating machinery, minor specification discrepancies are non-negotiable failure modes:
+- **Flange Geometry Mismatch:** A 6-inch Class 300 Raised Face (RF) valve cannot bolt leak-free to a Ring-Type Joint (RTJ) flange, and an ASME B16.47 Series A flange has an incompatible bolt circle with Series B.
+- **Functional Archetype Confusion:** Substituting a standard globe isolation valve for a stop-check non-return globe valve causes reverse-flow hydraulic hazards.
+- **Metallurgical & Sour Service Risk:** Installing carbon steel without NACE MR0175 / ISO 15156 hardness control ($\le 22\text{ HRC}$) in $\text{H}_2\text{S}$ service triggers sulfide stress cracking (SSC) and potential lethal release.
 
 ---
 
-## 7. Daily Developer Workflows & Commands
+## 2. Core Engineering Philosophy & Safety Invariants
 
-### Working with Equipment Taxonomy & Codegen
-When adding or updating a governed equipment class (e.g., ball valves, gate valves, mechanical seals):
-1. Navigate to [`packages/dna-registry/registry/class_files/`](file:///d:/Work/ICX/icx-platform/packages/dna-registry/registry/class_files/) or [`packages/dna-registry/registry/shared/`](file:///d:/Work/ICX/icx-platform/packages/dna-registry/registry/shared/).
-2. Edit or add the `.yaml` specification.
-3. Recompile the taxonomy into TypeScript Zod contracts, shadcn UI manifests, engine rules, and Python Pydantic v2 models:
-   ```bash
-   pnpm --filter @icx/dna-registry run generate
-   ```
-4. Verify all 124 validation vectors and 30 engine/insertion tests:
-   ```bash
-   pnpm --filter @icx/dna-registry run test:vectors
-   pnpm --filter @icx/engine-rules run test
-   ```
+Every algorithmic decision, data model, and user workflow in ICX is governed by strict safety invariants designed to eliminate guesswork.
 
-### Working with the Database Schema
-1. Edit schema definitions in [`packages/db/src/schema/tables.ts`](file:///d:/Work/ICX/icx-platform/packages/db/src/schema/tables.ts).
-2. Generate migration SQL files:
-   ```bash
-   pnpm --filter @icx/db run db:generate
-   ```
-3. Apply migrations to the local database:
-   ```bash
-   pnpm --filter @icx/db run db:migrate
-   ```
-4. Run security tests:
-   ```bash
-   pnpm run test:rls
-   ```
+> [!IMPORTANT]
+> **Rule 0 — Strict Abstention ("Missing Is Always Better Than a Guess")**
+> Neither the optical extraction pipeline nor the matching engine is permitted to interpolate, assume, or hallucinate missing engineering parameters. Any attribute not explicitly proven by a physical nameplate, catalog grammar, or certified test report is recorded as `UNKNOWN` and automatically routed to human engineering review—never to an approximate match.
 
-### Working with the AI Extractor & MPN Decoders
-1. Decoder implementations live in [`services/extractor/src/grammars/mpn_decoders/`](file:///d:/Work/ICX/icx-platform/services/extractor/src/grammars/mpn_decoders/).
-2. Run test suites:
-   ```bash
-   uv run --project services/extractor python -m unittest services/extractor/test_mpn_decoders.py
-   ```
+### The 4-Layer Progressive Clarification Pipeline
 
-### Monorepo Build Commands
-```bash
-# Build all packages and applications
-pnpm run build
+Industrial component qualification is structured into four hierarchical engineering layers. Lower layers govern physical and pressure-containment feasibility before internal trim or actuation options are evaluated:
 
-# Run linting across the repository
-pnpm run lint
+```mermaid
+flowchart TD
+    L1["Layer 1: Mechanical Interface & Boundary\n(NPS/DN, Pressure Class, Flange Standard, Face Type)\n-> Verifies physical bolting compatibility"]
+    L2["Layer 2: Pressure Boundary & Body Metallurgy\n(Body Material ASTM, Bonnet Design, Design Code)\n-> Verifies pressure-temperature & fluid containment"]
+    L3["Layer 3: Internal Trim & Sealing Metallurgy\n(Trim Code, Seat/Stem/Elastomer Material, NACE MR0175)\n-> Verifies corrosion resistance & sour service safety"]
+    L4["Layer 4: Actuation & Operational Controls\n(Lever, Gear, Pneumatic/Electric Actuator, Fail State)\n-> Verifies plant automation & control compatibility"]
 
-# Format all files (TypeScript, Python, Markdown, YAML)
-pnpm run format
+    L1 --> L2
+    L2 --> L3
+    L3 --> L4
 ```
 
----
+### Core Architectural Principles
 
-## 8. Non-Negotiable System Laws
-
-Every engineer and AI agent operating in this codebase must adhere to the **Core System Invariants**:
-
-1. **Law 1: Rule 0 — Strict Abstention ("Missing Is Always Better Than a Guess"):** Never hallucinate or interpolate missing engineering data. Missing mandatory attributes are recorded as `"UNKNOWN"` and route to `REVIEW_REQUIRED`.
-2. **Law 2: One Governed Class = One Archetype:** Cross-class auto-matching is strictly forbidden (`DISQ-L0-01`). A gate valve can never auto-match a ball valve.
-3. **Law 3: Flange & Mating Geometry Compatibility Is Absolute:** Components that cannot physically bolt together leak-free under design pressure are immediately `DISQUALIFIED` (`DISQ-L1-01` to `DISQ-L1-03`).
-4. **Law 4: Progressive Clarification Pipeline:** Layer 1 (Boundary/Mating) $\rightarrow$ Layer 2 (Body MOC) $\rightarrow$ Layer 3 (Trim/Sealing) $\rightarrow$ Layer 4 (Actuation & Compliance).
-5. **Law 5: 5-State Match Evaluation Model:** Every match evaluates strictly to `EXACT`, `ENGINEERING_EQUIVALENT`, `REVIEW_REQUIRED`, `DISQUALIFIED`, or `QUARANTINED`.
-6. **Law 6: Dual-Table Isolation, PostgreSQL RLS & `LocationScopeGuard`:** Private items live in `inventory_item` behind tenant RLS (`icx_app` with `NOBYPASSRLS`) and warehouse scope checks (`assignedLocationIds`). Public listings live in `market_listing` and are 100% tenant-blind.
-7. **Law 7: Insertion Pipeline Guardrails:** Zero runtime YAML parsing (compile-time codegen only), Datasheet $\neq$ Physical Proof of Stock (2–3 Zone A physical smartphone photos required to publish; Zone B PDFs are optional boosters), and Controlled OEM Part Numbers (`^[A-Z0-9\-\._/]{3,50}$`, `sufficient_alone: false`).
+1. **Mutually Exclusive Archetypes:** Cross-class automatic matching is strictly forbidden (`DISQ-L0-01`). A floating ball valve can never auto-match a trunnion-mounted ball valve or a gate valve.
+2. **Absolute Mating Compatibility:** Components that cannot physically mate under design pressure are immediately disqualified (`DISQ-L1-01` through `DISQ-L1-03`).
+3. **Datasheet $\neq$ Physical Proof of Stock:** Manufacturer PDF catalogs describe generic design specifications, not physical warehouse possession. Live marketplace publication always requires physical photographic evidence.
+4. **Controlled OEM Part Number Guardrails:** Free-text descriptions are prohibited in part-number fields; manufacturers are selected from a controlled registry and part numbers undergo strict structural normalization.
 
 ---
 
-## 9. Canonical Knowledge Base & Developer Skills
+## 3. System Architecture & Trust Boundaries
 
-For in-depth domain specifications, architectural diagrams, and procedural guides, consult:
+ICX employs a **decoupled, service-oriented architecture** that isolates untrusted optical compute, deterministic engineering rules, and multi-tenant transactional storage across strict network and privilege boundaries.
 
-### Declarative Knowledge Base ([`.ICX_context/00_README.md`](./.ICX_context/00_README.md))
-- [`01_PROJECT_VISION_AND_DOMAIN.md`](./.ICX_context/01_PROJECT_VISION_AND_DOMAIN.md) — Business context, 31 governed classes, and process industry standards (ASME, API, NACE, ISO).
-- [`02_SYSTEM_ARCHITECTURE_AND_CONTAINERS.md`](./.ICX_context/02_SYSTEM_ARCHITECTURE_AND_CONTAINERS.md) — Container topology, BullMQ + SSE queues, and network segmentation.
-- [`03_NON_NEGOTIABLE_ENGINEERING_LAWS.md`](./.ICX_context/03_NON_NEGOTIABLE_ENGINEERING_LAWS.md) — The 7 engineering & insertion laws, 5 match states, and 5 completeness stages.
-- [`04_DATABASE_ARCHITECTURE_AND_PATTERNS.md`](./.ICX_context/04_DATABASE_ARCHITECTURE_AND_PATTERNS.md) — Multi-tenancy, PostgreSQL 16 RLS, and Drizzle ORM `withTenant` patterns.
-- [`05_TAXONOMY_AND_CODEGEN_SYSTEM.md`](./.ICX_context/05_TAXONOMY_AND_CODEGEN_SYSTEM.md) — 8 shared registries, 31 class YAMLs, and `scripts/generate.ts` codegen pipeline.
-- [`06_AI_EXTRACTION_AND_MPN_DECODERS.md`](./.ICX_context/06_AI_EXTRACTION_AND_MPN_DECODERS.md) — 2-Stage OpenCV CLAHE + PaddleOCR + Pydantic v2 pipeline and MPN regex grammars.
-- [`07_DATA_SOURCES_AND_PROVENANCE.md`](./.ICX_context/07_DATA_SOURCES_AND_PROVENANCE.md) — Controlled Data Sources (`SRC-01` to `SRC-18`), Zone A vs. Zone B artifact policy, and ISO 2230 shelf-life rules.
-- [`08_UI_FORM_ENGINE_AND_SHADCN_INTEGRATION.md`](./.ICX_context/08_UI_FORM_ENGINE_AND_SHADCN_INTEGRATION.md) — Dynamic `UiFieldMetadata` alignment with shadcn/ui (`select`, `combobox`, `input_number`, `switch`).
-- [`09_MANUAL_INSERTION_WORKFLOW_SPEC.md`](./.ICX_context/09_MANUAL_INSERTION_WORKFLOW_SPEC.md) — End-to-End Manual Single Spare Part Insertion Workflow (Modes A/B/C, `DnaAutoInferenceService`, DCS 0–100, REST + SSE APIs).
+```mermaid
+flowchart LR
+    subgraph Client ["Presentation Layer"]
+        UI["Dynamic Intake & RFQ Portal\n(3-Mode Wizard + Evidence Viewer)"]
+    end
 
-### Procedural Task Runbooks ([`.skills/README.md`](./.skills/README.md))
-- [**Skill 01**](./.skills/SKILL_01_TAXONOMY_CLASS_AUTHORING.md): Authoring & compiling governed equipment classes.
-- [**Skill 02**](./.skills/SKILL_02_MPN_DECODER_DEVELOPMENT.md): Building manufacturer part number grammars & Mode B synchronous decoding.
-- [**Skill 03**](./.skills/SKILL_03_BACKEND_RLS_DEVELOPMENT.md): Writing NestJS RLS transactional & inventory insertion endpoints.
-- [**Skill 04**](./.skills/SKILL_04_FRONTEND_UI_INTEGRATION.md): Building the Unified 5-Step Seller Intake Wizard & consuming UI manifests.
-- [**Skill 05**](./.skills/SKILL_05_TEST_VECTORS_AND_VERIFICATION.md): Executing the 124 validation vectors & 30 real-world user simulation/insertion tests.
-- [**Skill 06**](./.skills/SKILL_06_DOCUMENT_OCR_PIPELINE.md): 2-Stage Document OCR & spatial bounding-box extraction pipeline.
-- [**Skill 07**](./.skills/SKILL_07_DETERMINISTIC_CROSSWALK_MAPPING.md): Deterministic auto-inference & global enterprise crosswalks (UNSPSC, ECLASS, ISO 14224, CFIHOS, HS).
-- [**Skill 08**](./.skills/SKILL_08_DATA_COMPLETENESS_SCORING.md): 8-Weight DCS (`0–100`) calculation & 5-Stage completeness gating.
-- [**Skill 09**](./.skills/SKILL_09_ASYNC_QUEUE_WORKER.md): Developing BullMQ queue workers & Redis Pub/Sub SSE streams.
+    subgraph Core ["Orchestration & Deterministic Engine"]
+        API["Core API & Security Guards\n(Location Scope + Tenant Context)"]
+        ENG["Deterministic Rules Engine\n(Auto-Inference, DCS 0-100, 5-State Match)"]
+        QUEUE["Async Job Broker & Event Stream\n(Real-Time Extraction Progress)"]
+    end
 
----
+    subgraph Compute ["Air-Gapped Extraction Worker"]
+        OCR["Computer Vision & MPN Engine\n(OpenCV CLAHE + OCR + Grammar Decoders)\nZero Database Access"]
+    end
 
-## 10. Troubleshooting & FAQ
+    subgraph Storage ["Zero-Trust Persistence Layer"]
+        VAULT[("Private Tenant Vault\nRow-Level Security Enforced\nCosts, Tags, Locations, Raw PDFs")]
+        MARKET[("Public Anonymized Catalog\nTenant-Blind Projections\nMasked Reference IDs + Technical DNA")]
+        OBJ[("Encrypted Object Vault\nZone A Photos & Zone B Certificates")]
+    end
 
-### 1. `FATAL ERROR: Zone Allocation failed - process out of memory` during API build
-**Solution:** The Master Discriminated Union across all **31 governed classes** creates a large TypeScript AST. The build script in `apps/api/package.json` is configured with `node --max-old-space-size=4096 ./node_modules/typescript/bin/tsc`. Ensure your machine has at least 4 GB free RAM during compilation.
+    UI -->|"Authenticated Requests"| API
+    UI -.->|"Direct Encrypted Upload"| OBJ
+    API --> ENG
+    API --> QUEUE
+    QUEUE -->|"Stateless Image/PDF Jobs"| OCR
+    OCR -.->|"Reads Artifacts"| OBJ
+    API -->|"Tenant-Scoped Read/Write"| VAULT
+    ENG -->|"Sanitized Projection"| MARKET
+```
 
-### 2. PostgreSQL throws `invalid input syntax for type uuid: ""`
-**Cause:** Attempting to cast an empty string or unset session variable to UUID: `current_setting('app.current_tenant_id', true)::uuid`.  
-**Solution:** Always use the `nullif` safeguard: `nullif(current_setting('app.current_tenant_id', true), '')::uuid`.
+### Key Architectural Characteristics
 
-### 3. PostgreSQL throws `cannot insert multiple commands into a prepared statement`
-**Cause:** Using `SET LOCAL app.current_tenant_id = $1` with parameter binding. PostgreSQL utility statements reject prepared parameters.  
-**Solution:** Use the parameter-safe function: `SELECT set_config('app.current_tenant_id', $1, true)`.
-
-### 4. pgAdmin or Drizzle Studio cannot connect to PostgreSQL
-- Ensure the containers are running: `docker compose -f infra/compose/compose.yaml -f infra/compose/compose.dev.yaml ps`
-- When connecting via pgAdmin, set the server to `postgres` (internal Docker hostname) or `127.0.0.1:5432` if connecting from the host machine.
-- User: `icx_owner` (password: `icx_local_owner_secret_2026`) or `icx_app` (password: `icx_local_app_secret_2026`).
+- **Compile-Time Schema Governance:** All 31 equipment classes and shared engineering tables are authored as declarative specifications and compiled at build time into strongly typed validation contracts, UI metadata manifests, and strict extraction schemas—eliminating runtime configuration parsing errors.
+- **Air-Gapped AI Compute:** The optical extraction and MPN decoding microservice holds zero database credentials and no direct route to transactional storage, ensuring pure stateless computation.
+- **Event-Driven Extraction Feedback:** Long-running computer vision tasks execute asynchronously via message queues and stream granular stage transitions (`PREPROCESSING_IMAGE` $\rightarrow$ `CLASSIFYING_PART` $\rightarrow$ `EXTRACTING_4_LAYER_DNA` $\rightarrow$ `EXTRACTION_COMPLETE`) back to the user interface in real time.
 
 ---
 
-## License & Intellectual Property
-Proprietary & Confidential. All rights reserved by ICX (Industrial Circular Exchange). Unauthorized copying, transfer, or distribution of this software and associated engineering grammars is strictly prohibited.
+## 4. Governed Equipment Taxonomy & International Standards
 
+ICX governs **31 distinct industrial equipment archetypes** partitioned across two high-consequence equipment families: **16 Fluid Process Valve classes** and **15 Mechanical Seal & Dry Gas Seal (DGS) classes**.
+
+```mermaid
+xychart-beta
+    title "Distribution of 31 Governed Equipment Classes by Sub-Family"
+    x-axis ["Gate Valves", "Ball Valves", "Butterfly", "Check", "Globe", "Relief", "Control", "Pump Seals", "DGS Systems", "Component", "Other Seals"]
+    y-axis "Governed Classes" 0 --> 6
+    bar [4, 3, 2, 2, 2, 2, 1, 5, 5, 2, 3]
+```
+
+### Equipment Family Coverage
+
+| Equipment Family | Sub-Categories Covered | Class Count | Primary Governing Standards |
+| :--- | :--- | :---: | :--- |
+| **Process Valves** | Flanged Cast Gate, Forged Small-Bore Gate, Pressure Seal Gate, Slab Gate, Floating & Trunnion Ball, Double/Triple-Offset Butterfly, Swing & Dual-Plate Check, Isolation & Stop-Check Globe, Modulating Control, Spring & Pilot Safety Relief | **16** | ASME B16.34, ASME B16.5 / B16.47, ASME B16.10, API 6D, API 600, API 602, API 520/526/527, API 598, IEC 60534, ANSI/FCI 70-2 |
+| **Mechanical Seals & DGS Systems** | API 682 Pump Cartridges (Types A/B/C, Arrangements 1/2/3), Elastomer & Welded Metal Bellows Component Seals, Agitator/Reactor Seals, Compressor Dry Gas Seal Cartridges, Separation Barrier Seals, DGS Control & Filter Units, Seal Face Subassemblies, Elastomer O-Ring Kits | **15** | API 682 / ISO 21049, API 692, API 617, EN 12756, DIN 28138, ISO 2230, ISO 3601 / SAE AS568 |
+
+### Cross-Domain Regulatory & Enterprise Interoperability
+
+- **Metallurgy & Sour Service Compliance:** NACE MR0175 / ISO 15156, NACE MR0103 / ISO 17945, and EN 10204 Type 3.1 / 3.2 Mill Test Certificates.
+- **Automated Enterprise Crosswalks:** Every governed asset maps deterministically to global procurement and asset-management taxonomies, including **UNSPSC**, **ECLASS**, **ISO 14224**, **CFIHOS**, and **Harmonized System (HS)** customs codes.
+
+---
+
+## 5. Multi-Modal Intake & Computer Vision Pipeline
+
+To eliminate manual data-entry friction while enforcing strict evidentiary proof, sellers enter spare parts through a **Unified 5-Step Intake Workflow** featuring **three convergent Step 1 intake modes** on a single screen:
+
+```mermaid
+flowchart TD
+    S0["Step 0: Warehouse Scope Selection\nVerified against User's Assigned Facility Permissions"] --> S1{"Step 1: 3 Convergent Intake Modes"}
+
+    S1 -->|"Mode A: Default AI Dropzone"| MA["Smart Photo & PDF Upload\nOpenCV CLAHE + OCR Bounding Boxes + Schema-Locked Extraction"]
+    S1 -->|"Mode B: Fast-Track < 50 ms"| MB["OEM Part / Figure Number Decoder\nDeterministic Grammar Parsing across Controlled OEMs"]
+    S1 -->|"Mode C: Guided Fallback"| MC["3-Click Visual Taxonomy Picker\nL2 Family -> L3 Category -> L4 Class Card"]
+
+    MA --> CONV["Steps 2-5: Split-Screen 4-Layer Verification Form\n- Interactive Bounding-Box Evidence Highlighting\n- Field Provenance Badges & Ambiguity Trap Alerts\n- Real-Time Standard Auto-Inference & DCS (0-100) Gauge"]
+    MB --> CONV
+    MC --> CONV
+
+    CONV --> PUB["Dual-Table Publication\nPrivate Vault Record + Anonymized Marketplace Projection"]
+```
+
+### Low-Friction Evidence Policy: Zone A vs. Zone B
+
+To balance warehouse usability with anti-counterfeit protection, ICX separates physical proof from engineering certifications:
+
+| Evidence Zone | Purpose | Requirement Level | Representative Artifacts |
+| :--- | :--- | :--- | :--- |
+| **Zone A (Physical Proof)** | Confirms physical custody, nameplate legibility, heat-code marking, and preservation condition. | **Mandatory to Publish** (2–3 smartphone photos) | Nameplate Macro Photo, Body Heat-Stamp Photo, Flange / Seal Face Photo, Elastomer Cure Bag Photo |
+| **Zone B (Certification Boosters)** | Confirms metallurgical chemistry, factory test pressure, and exact dimensional envelope. | **Optional at Intake** (unlocks `EXACT_MATCH_ELIGIBLE` upon Steward audit) | EN 10204 3.1/3.2 Mill Test Certificate, OEM GA Drawing PDF, Hydrostatic Test Report, Fire-Safe / Fugitive Emission Certs |
+
+### Optical Pre-Processing & Deterministic MPN Grammars
+
+- **Industrial Image Enhancement:** Physical nameplates in refineries and storage yards frequently suffer from corrosion, oil film, glare, and low-contrast stamped lettering. The vision pipeline applies **OpenCV CLAHE (Contrast Limited Adaptive Histogram Equalization)**, perspective deskewing, and glare suppression prior to spatial OCR bounding-box extraction.
+- **OEM Figure Number Decoding (`< 50 ms`):** Industrial Manufacturer Part Numbers encode dense mechanical specifications (valve family, port type, pressure class, body alloy, end connection, and API trim). Deterministic regex grammar decoders extract 60–75% of Layers 1–3 instantaneously across controlled OEMs (e.g., Velan, Kitz, Emerson Fisher/Crosby, John Crane, EagleBurgmann, Flowserve, Cameron WKM) as well as EN 12756 and API 682 seal designations.
+
+---
+
+## 6. Deterministic Matching, Auto-Inference & Completeness Scoring
+
+### Standard-Locked Deterministic Auto-Inference
+
+When primary attributes are verified, ICX's deterministic inference engine derives mathematically locked secondary parameters directly from international standard tables—never via probabilistic guessing:
+
+- **Dimensional & Flange Cross-Inference:** Bidirectional `NPS` $\leftrightarrow$ `DN` conversion (`ASME B36.10M` / `ISO 6708`), `ASME B16.5` flange assignment for $\text{NPS} \le 24$, `ASME B16.10` face-to-face dimensions, `API 6D` minimum full-port bores, `API 526` safety relief orifice areas, and `EN 12756` mechanical seal cavity dimensions.
+- **Pressure-Temperature & Metallurgy Tables:** `ASME B16.34` material group mapping, temperature bounds, and linear P-T curve interpolation; `API 600` seat-insert inference from trim codes.
+- **Elastomer Shelf-Life Calculation:** Automated expiration computation per **ISO 2230** from cure-quarter markings and polymer chemistry (`NBR` = 5 yrs, `EPDM/HNBR` = 7 yrs, `FKM/FEPM/FFKM` = 10 yrs, `PTFE` = 15 yrs), alongside `SAE AS568` O-ring cross-sectional geometry.
+
+### Data Completeness Score (`DCS 0–100`) & 5-Stage Lifecycle Gating
+
+Every asset receives a dynamic **Data Completeness Score (`0–100`)** weighted across seven positive quality dimensions and one duplicate-risk penalty:
+
+```mermaid
+xychart-beta
+    title "Data Completeness Score (DCS) Maximum Point Weights by Dimension"
+    x-axis ["Mandatory DNA", "Cert Validity", "Material & Serial", "Dimensional", "Photo Quality", "Test Recency", "Seller KYC"]
+    y-axis "Max Weight (Points)" 0 --> 35
+    bar [30, 25, 20, 15, 10, 5, 5]
+```
+
+> **Note:** Individual class governance profiles tune exact sub-weights (`20–25` for certificates, `15–20` for material/serial traceability, `10–15` for dimensional consistency, `0–5` for inspection recency) normalized to a `0–100` scale, while duplicate inventory detections apply a `-25` point penalty.
+
+The `DCS` score, Zone A photo status, and automated safety rules govern progression across **5 deterministic lifecycle stages**:
+
+```mermaid
+stateDiagram-v2
+    [*] --> DRAFT_LISTING : Intake Initialized (DCS < 50 or Zone A Incomplete)
+    DRAFT_LISTING --> SEARCHABLE_LISTING : DCS >= 50 + Zone A Photos Uploaded
+    SEARCHABLE_LISTING --> RFQ_READY_LISTING : DCS >= 75 + Layers 1-3 & Condition Complete
+    RFQ_READY_LISTING --> EXACT_MATCH_ELIGIBLE : DCS >= 90 + Layers 1-4 Exact + Steward-Verified PDFs
+
+    DRAFT_LISTING --> QUARANTINED : Safety / Integrity Defect Detected
+    SEARCHABLE_LISTING --> QUARANTINED : Expired Shelf Life / Failed Test / Heat Mismatch
+    RFQ_READY_LISTING --> QUARANTINED : Audit Discrepancy Detected
+```
+
+### 5-State Deterministic Match Evaluation
+
+When a Buyer Reliability Engineer submits a parametric Request for Quotation (RFQ), every candidate asset evaluates deterministically into exactly one state:
+
+| Match State | Engineering Criteria | Procurement Action |
+| :--- | :--- | :--- |
+| **`EXACT`** | 100% parameter alignment across Layers 1–3 with Steward-verified certificates and Zone A proof. | Eligible for immediate purchase order execution. |
+| **`ENGINEERING_EQUIVALENT`** | Candidate safely exceeds buyer specification without altering mating geometry or process chemistry (e.g., 316SS upgrade over 304SS, Stellite 6 hardfacing, higher pressure rating with matching envelope). | Approved match accompanied by an automated engineering upgrade notice. |
+| **`REVIEW_REQUIRED`** | Compatible Layer 1 physical interface, but secondary documentation, hydrotest recency ($\gt 24\text{–}36$ months), or unverified attributes require sign-off. | Routed to Catalog Steward or Buyer Reliability Engineer for evidence review. |
+| **`DISQUALIFIED`** | Hard physical, metallurgical, or regulatory incompatibility (class mismatch, incompatible flange standard, lower pressure class, missing NACE sour qualification). | Excluded with explicit engineering reason codes. |
+| **`QUARANTINED`** | Heat-number contradiction between photo and MTC, uncertified repair history, severe outdoor corrosion, failed hydrotest/borescope, or expired elastomer shelf life. | Locked in Private Vault; completely hidden from marketplace search. |
+
+---
+
+## 7. Multi-Tenant Data Sovereignty & Provenance Governance
+
+### Dual-Table Isolation & Kernel-Level Privacy
+
+Industrial sellers require absolute confidentiality over purchase costs, warehouse bin locations, and internal plant asset tags. ICX enforces privacy at the database kernel level:
+
+1. **Private Inventory Vault:** Protected by **PostgreSQL Row-Level Security (RLS)** running under an unprivileged application role without bypass privileges, combined with facility-level **Location Scope Guards** restricting every user strictly to their assigned warehouses.
+2. **Anonymized Public Catalog:** Upon publication, private metadata is stripped and projected into a tenant-blind catalog identified solely by cryptographically masked item fingerprints and verified technical DNA.
+
+```mermaid
+sequenceDiagram
+    actor Seller as Seller Warehouse Manager
+    participant API as Security & Scope Guard
+    participant Vault as Private Vault (RLS)
+    participant Public as Anonymized Public Catalog
+    actor Steward as ICX Catalog Steward
+    actor Buyer as Buyer Reliability Engineer
+
+    Seller->>API: Submit Zone A Photos & Technical Attributes
+    API->>Vault: Store Private Cost, Warehouse ID & Raw Evidence (Tenant-Isolated)
+    API->>Public: Project Sanitized Technical DNA + Masked Fingerprint (DCS >= 50)
+    Note over Public: Zero tenant IDs, costs, or warehouse locations exposed
+    Steward->>Vault: Audit Zone B Certificates (EN 10204 3.1 / GA Drawing)
+    Steward->>Public: Promote Listing to EXACT_MATCH_ELIGIBLE (DCS >= 90)
+    Buyer->>Public: Submit Parametric RFQ (Class, NPS, Pressure, MOC, NACE)
+    Public-->>Buyer: Return 5-State Match Results + Provenance Lineage
+```
+
+### Controlled Data Provenance Hierarchy
+
+Every individual technical attribute stored in an asset's profile carries an explicit provenance lineage across **17 controlled data sources** (`SRC-01` through `SRC-18`), organized into three confidence tiers:
+
+| Confidence Tier | Representative Sources | Trust Semantics |
+| :--- | :--- | :--- |
+| **Tier 1: `SELF_DECLARED`** | Manual Wizard Entry, ERP Inventory Export, Generic OEM Catalog | Lowest authority; routes high-consequence parameters to `REVIEW_REQUIRED`. |
+| **Tier 2: `PHYSICALLY_VERIFIED`** | Nameplate Macro Photo OCR, Body Heat-Stamp Photo, OEM GA Drawing, Physical Inspection | Medium-high authority; visually anchored to physical bounding-box evidence. |
+| **Tier 3: `MTR_AUTHENTICATED` / `STEWARD_AUDITED`** | EN 10204 3.1/3.2 Mill Test Certificate, Hydrostatic Test Sheet, Authorized OEM Confirmation, Steward Audit | Highest non-repudiable authority; required for `EXACT` match eligibility. |
+
+---
+
+## 8. Verification Methodology & Key System Metrics
+
+To uphold safety-critical reliability without exposing production source code, the engineering platform is validated continuously through a multi-gate deterministic verification suite:
+
+| Verification Gate | Coverage Scope | Verification Focus |
+| :--- | :--- | :--- |
+| **Taxonomy Vector Suite** | **124 validation vectors** (`31 classes × 4 vectors`) | Enforces valid exact schemas, draft `UNKNOWN` abstention, and structural rejection across all 31 classes. |
+| **Matching & Workflow Suite** | **30 end-to-end simulation tests** | Verifies 5-state match outcomes, Rule 0 abstention, deterministic auto-inference, DCS 0–100 scoring, and quarantine triggers. |
+| **Multi-Tenant Security Suite** | **11 database isolation tests** | Proves kernel-level PostgreSQL Row-Level Security prevents cross-tenant leakage under unprivileged roles. |
+| **MPN Grammar Suite** | **8 OEM decoder suites** | Validates sub-50 ms parsing accuracy and strict abstention on malformed or ambiguous catalog strings. |
+
+---
+
+<div align="center">
+
+### Summary of Platform Capabilities
+
+| Dimension | Specification |
+| :--- | :--- |
+| **Target Industries** | Oil & Gas, Petrochemicals, Fertilizers, Power Generation, Heavy Refining |
+| **Governed Equipment** | 31 Mutually Exclusive Classes (16 Process Valves + 15 Mechanical & Dry Gas Seals) |
+| **Safety Standard** | Rule 0 Strict Abstention + 5-State Deterministic Match Evaluation |
+| **Intake Experience** | 3-Mode Convergent Step 1 (AI Photo/PDF Dropzone, `<50 ms` MPN Decoder, Guided Class Picker) |
+| **Data Sovereignty** | Dual-Table Private/Public Isolation + PostgreSQL RLS + Location Scope Enforcement |
+
+<br />
+
+<sub><b>ICX — Industrial Circular Exchange</b> &bull; Proprietary Engineering Architecture &amp; Domain Specification Showcase</sub>
+
+</div>
