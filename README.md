@@ -11,7 +11,7 @@
 ---
 
 <p align="center">
-     <img width="855" height="742" alt="image" src="https://github.com/user-attachments/assets/0d80f538-0c07-4643-8f1d-11aeb99f16a3" />
+     <img width="1917" height="817" alt="image" src="https://github.com/user-attachments/assets/9fe2a880-f7b5-4bfb-94b6-47c9e12991bd" />
      <br />
      <sub><b>Figure 1:</b> Unified Step 1 Intake — Mode A (Zone A/B Artifact Dropzone & 3-Angle Guided Blueprint Stencil), Mode B (&lt;50 ms OEM Figure Number Decoder), and Mode C (Visual L2 &rarr; L4 Class Selector).</sub>
    </p>
